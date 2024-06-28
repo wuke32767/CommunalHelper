@@ -26,6 +26,9 @@ public static class DreamTunnelDash
 
     #endregion
 
+    public static DreamTunnelDashController Controller => ControllerInScene(Engine.Scene);
+    public static DreamTunnelDashController ControllerInScene(Scene scene) => scene.Tracker.GetEntity<DreamTunnelDashController>();
+
     public static int StDreamTunnelDash = -1;
     private static int dreamTunnelDashCount = 0;
     public static int DreamTunnelDashCount

@@ -27,7 +27,9 @@ public static class DreamTunnelDash
     #endregion
 
     public static DreamTunnelDashController Controller => ControllerInScene(Engine.Scene);
-    public static DreamTunnelDashController ControllerInScene(Scene scene) => scene.Tracker.GetEntity<DreamTunnelDashController>();
+    public static DreamTunnelDashController ControllerInScene(Scene scene) => scene?.Tracker.GetEntity<DreamTunnelDashController>();
+
+    private static float currentDashSpeed;
 
     public static int StDreamTunnelDash = -1;
     private static int dreamTunnelDashCount = 0;
@@ -618,7 +620,17 @@ public static class DreamTunnelDash
         if (player.DashDir.Y > 0)
             player.Ducking = false;
 
-        player.Speed = player.DashDir * Player_DashSpeed;
+        var controller = ControllerInScene(player.Scene);
+        currentDashSpeed = controller?.calculateStartSpeed(player.Speed.Length()) ?? Player_DashSpeed;
+
+        if (controller?.UseEntrySpeedAngle ?? false)
+        {
+            player.Speed = player.DashDir * currentDashSpeed;
+        }
+        else
+        {
+            player.Speed = player.Speed.SafeNormalize(player.DashDir) * currentDashSpeed;
+        }
         player.TreatNaive = true;
         player.Depth = Depths.PlayerDreamDashing;
         playerData.Set(Player_dreamTunnelDashCanEndTimer, 0.1f);
@@ -688,7 +700,7 @@ public static class DreamTunnelDash
                     vector = Vector2.Dot(input, vector) != -0.8f ? vector.RotateTowards(input.Angle(), 5f * Engine.DeltaTime) : vector;
                     vector = vector.CorrectJoystickPrecision();
                     player.DashDir = vector;
-                    player.Speed = vector * 240f;
+                    player.Speed = vector * currentDashSpeed;
                 }
             }
         }

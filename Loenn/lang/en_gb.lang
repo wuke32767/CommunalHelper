@@ -1,5 +1,11 @@
 mods.CommunalHelper.name=Communal Helper
 
+# Dream Tunnel Dash Controller
+entities.CommunalHelper/DreamTunnelDashController.placements.name.controller=Dream Tunnel Dash Controller
+entities.CommunalHelper/DreamTunnelDashController.attributes.description.neverSlowDown=placeholder
+entities.CommunalHelper/DreamTunnelDashController.attributes.description.overrideDreamTunnelDashSpeed=placeholder
+entities.CommunalHelper/DreamTunnelDashController.attributes.description.dreamTunnelDashSpeed=placeholder
+
 # Dream Refill
 entities.CommunalHelper/DreamRefill.placements.name.dream_refill=Dream Refill
 entities.CommunalHelper/DreamRefill.placements.name.double_dream_refill=Dream Refill (Two Dashes)

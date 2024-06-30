@@ -625,11 +625,11 @@ public static class DreamTunnelDash
 
         if (controller?.UseEntrySpeedAngle ?? false)
         {
-            player.Speed = player.DashDir * currentDashSpeed;
+            player.Speed = player.Speed.SafeNormalize(player.DashDir) * currentDashSpeed;
         }
         else
         {
-            player.Speed = player.Speed.SafeNormalize(player.DashDir) * currentDashSpeed;
+            player.Speed = player.DashDir * currentDashSpeed;
         }
         player.TreatNaive = true;
         player.Depth = Depths.PlayerDreamDashing;

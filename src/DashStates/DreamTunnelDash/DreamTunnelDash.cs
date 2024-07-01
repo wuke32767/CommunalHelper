@@ -707,7 +707,8 @@ public static class DreamTunnelDash
         }
 
         var sameDir = Input.GetAimVector() == player.DashDir;
-        if (player.CanDash
+        if (Input.Aim.Value != Vector2.Zero
+            && player.CanDash
             && controller is not null
             && controller.allowDreamTunnelDashRedirect
             && (controller.allowSameDirectionDash || !sameDir)

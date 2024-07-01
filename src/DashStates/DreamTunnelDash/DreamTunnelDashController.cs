@@ -27,17 +27,16 @@ public class DreamTunnelDashController(EntityData e, Vector2 offset) : Entity()
         }
         return target;
     }
+    internal bool allowDreamTunnelDashRedirect = e.Bool("allowDreamTunnelDashRedirect");
+    internal bool allowSameDirectionDash = e.Bool("allowSameDirectionDash");
+    internal bool allowNormalDashRedirect = e.Bool("allowNormalDashRedirect");
+    internal float sameDirectionSpeedMultiplier = e.Float("sameDirectionSpeedMultiplier", 1.0f);
 
 
     #region wip
-    internal bool allowSameDirectionDash = e.Bool("allowSameDirectionDash");
-    internal bool allowDreamTunnelDashRedirect = e.Bool("allowDreamTunnelDashRedirect");
-    internal bool allowNormalDashRedirect = e.Bool("allowNormalDashRedirect");
 
     internal bool BounceOnCollision = e.Bool("bounceOnCollision");
     internal bool stickOnCollision = e.Bool("stickOnCollision");
-
-    internal float sameDirectionSpeedMultiplier = e.Float("sameDirectionSpeedMultiplier", 1.0f);
 
     internal bool DreamBlockKillPlayer = e.Bool("DreamBlockKillPlayer", true);
     #endregion

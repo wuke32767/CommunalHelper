@@ -11,10 +11,14 @@ dreamTunnelDashController.placements = {
             overrideDreamTunnelDashSpeed = false,
             dreamTunnelDashSpeed = 240,
             useEntrySpeedAngle = false,
+            allowDreamTunnelDashRedirect = false,
+            allowSameDirectionDash = false,
+            allowNormalDashRedirect = false,
+            sameDirectionSpeedMultiplier = 1.0,
         }
     }
 }
 
-dreamTunnelDashController.texture="objects/CommunalHelper/dreamTunnelDashController/icon"
+dreamTunnelDashController.texture = "objects/CommunalHelper/dreamTunnelDashController/icon"
 
 return dreamTunnelDashController

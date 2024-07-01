@@ -687,6 +687,7 @@ public static class DreamTunnelDash
 
     private static int DreamTunnelDashUpdate(this Player player)
     {
+        var controller = ControllerInScene(player.Scene);
         DynamicData playerData = player.GetData();
 
         if (FeatherMode)
@@ -704,6 +705,30 @@ public static class DreamTunnelDash
                 }
             }
         }
+
+        var sameDir = Input.GetAimVector() == player.DashDir;
+        if (player.CanDash
+            && controller is not null
+            && controller.allowDreamTunnelDashRedirect
+            && (controller.allowSameDirectionDash || !sameDir)
+            && (HasDreamTunnelDash || controller.allowNormalDashRedirect))
+        {
+            if (sameDir)
+            {
+                player.Speed *= controller.sameDirectionSpeedMultiplier;
+                player.DashDir *= Math.Sign(controller.sameDirectionSpeedMultiplier);
+                currentDashSpeed *= controller.sameDirectionSpeedMultiplier;
+            }
+            else
+            {
+                player.DashDir = Input.GetAimVector();
+                player.Speed = player.DashDir * currentDashSpeed;
+            }
+            player.Dashes = Math.Max(0, player.Dashes - 1);
+            Input.Dash.ConsumeBuffer();
+            HasDreamTunnelDash = false;
+        }
+
 
         Input.Rumble(RumbleStrength.Light, RumbleLength.Medium);
         Vector2 position = player.Position;

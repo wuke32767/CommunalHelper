@@ -711,7 +711,7 @@ public static class DreamTunnelDash
             && controller is not null
             && controller.allowDreamTunnelDashRedirect
             && (controller.allowSameDirectionDash || !sameDir)
-            && (HasDreamTunnelDash || controller.allowNormalDashRedirect))
+            && (DreamTunnelDashCount > 0 || controller.allowNormalDashRedirect))
         {
             if (sameDir)
             {
@@ -726,7 +726,7 @@ public static class DreamTunnelDash
             }
             player.Dashes = Math.Max(0, player.Dashes - 1);
             Input.Dash.ConsumeBuffer();
-            HasDreamTunnelDash = false;
+            DreamTunnelDashCount--;
         }
 
 
